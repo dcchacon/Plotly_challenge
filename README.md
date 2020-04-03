@@ -1,2 +1,2 @@
-# dcmedina-gmail.com
+# Plotly
 Plotly_challenge
