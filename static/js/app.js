@@ -1,4 +1,5 @@
 // D3 library to read from json file
+
 //const buildChart = (someSampleID) => {
 d3.json("samples.json").then((data) => {
     const sample = "940"
@@ -11,16 +12,24 @@ d3.json("samples.json").then((data) => {
 
     // use otu_ids as the labels for the bar chart
     // use otu_labels as the hovertext for the chart
-    var otu_ids = result.otu_ids
-    var otu_labels = result.otu_labels
-    var sample_values = result.sample_values
+    var otu_ids = result.otu_ids.slice(0, 10).reverse();
+    var otu_labels = result.otu_labels.slice(0, 10).reverse();
+    var sample_values = result.sample_values.slice(0, 10).reverse();
+    var labels = otu_ids.map(IDstring => `OTU ${IDstring}`)
 
-//Graph
-var Graph = {
-    labels: otu_labels,
-    values: sample_values,
-    
-}
+    //Graph
+    var trace1 = {
+        y: labels,
+        x: sample_values,
+        type: "bar",
+        orientation: "h"
+
+    };
+
+    // Create a data array for the plot
+    var trace1data = [trace1]
+
+    Plotly.newPlot("bar", trace1data);
 
 }).catch(err => console.log(err));
 //}
