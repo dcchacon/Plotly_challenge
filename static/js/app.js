@@ -1,6 +1,6 @@
 // D3 library to read from json file
 
-// const buildChart = (someSampleID) => {
+// const buildChart = (sample) => {
     d3.json("samples.json").then((data) => {
         const sample = "940"
         // use sample_values as the values for the bar chart
@@ -34,7 +34,7 @@
     }).catch(err => console.log(err));
 // };
 
-// // function buildBubbleChart(samples) {
+function buildBubbleChart(samples) {
     d3.json("samples.json").then((trace2data) => {
         console.log(trace2data)
 
@@ -70,19 +70,19 @@
     Plotly.newPlot("bubble", trace2data, layout2);
     
     }).catch(err => console.log(err));
-// // }
+}
     
 
 //Display the sample metadata, i.e. an individual's demographic information
 
 // Function that Builds the Metadata Panel
 function buildMetadata(sample) {
-
-    
-  
+ 
+ 
     // Use `d3.json` to Fetch the Metadata for a Sample
     //   d3.json(`/metadata/${sample}`).then((data) => {
-        d3.json(`metadata.${sample}`).then((data) => {          
+        d3.json(`metadata.${sample}`).then((data) => {  
+            console.log(data)        
           // Use d3 to Select the Panel with id of `#sample-metadata`
           var PANEL = d3.select("#sample-metadata");
           // Clear any Existing Metadata
