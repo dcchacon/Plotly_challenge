@@ -1,8 +1,8 @@
 // D3 library to read from json file
 
-// const buildChart = (sample) => {
+function buildChart(sample) {
     d3.json("samples.json").then((data) => {
-        const sample = "940"
+        // const sample = "940"
         // use sample_values as the values for the bar chart
         // console.log(data)
         const samples = data.samples
@@ -31,46 +31,50 @@
 
         Plotly.newPlot("bar", trace1data);
 
-    }).catch(err => console.log(err));
+    })//.catch(err => console.log(err));
 // };
+}
 
-function buildBubbleChart(samples) {
+// function buildBubbleChart(samples) {
     d3.json("samples.json").then((trace2data) => {
         console.log(trace2data)
 
         var x_axis = trace2data.otu_ids;
-        var otu_labels = trace2data.otu_labels;
+        //var otu_labels = trace2data.otu_labels;
         var y_axis = trace2data.sample_values;
         
 
         //Create a buble chart that displays each sample
-        var trace2 = {
+        var trace2 = [{
 
         //Use otu_ids for the x values
             x: x_axis,
         //Use sample_values for the y values
             y: y_axis,
-        //Use sample_values for the marker size
-            // r=sample_values,
-        // Use otu_ids for the marker colors
+        //Create the mode 
+            mode: "markers",
+        //Create properties for the markers
             marker: {
                 size:y_axis,
                 color:x_axis
             }
-        };
+        }];
 
     var trace2data = [trace2]
     
     var layout2 = {
         title: "Belly Button Bacteria",
-        xaxis: {title: "OTU ID"}
+        margin: {t:0},
+        hovermode: "closest",
+        xaxis: {title: "OTU ID"},
+        margin: {t:30}
     };
         //Use otu_labels for the text values
 
     Plotly.newPlot("bubble", trace2data, layout2);
     
-    }).catch(err => console.log(err));
-}
+    })//.catch(err => console.log(err));
+//}
     
 
 //Display the sample metadata, i.e. an individual's demographic information
@@ -81,7 +85,7 @@ function buildMetadata(sample) {
  
     // Use `d3.json` to Fetch the Metadata for a Sample
     //   d3.json(`/metadata/${sample}`).then((data) => {
-        d3.json(`metadata.${sample}`).then((data) => {  
+        d3.json(`metadata.${sample}.json`).then((data) => {  
             console.log(data)        
           // Use d3 to Select the Panel with id of `#sample-metadata`
           var PANEL = d3.select("#sample-metadata");
